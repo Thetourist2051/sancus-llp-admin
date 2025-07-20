@@ -200,6 +200,31 @@
     animation: collapse-class 0.5s forwards;
 }
 
+.overlay-panel-body {
+    width: 200px !important;
+    padding: 0rem !important;
+    border-radius: 0rem !important;
+
+    ul {
+        li {
+            cursor: pointer;
+
+            .panel_item {
+                background-color: #fff;
+                color: var(--primary-700);
+            }
+
+            .panel_item:hover {
+                transition: all 0.5s;
+                color: var(--primary-800);
+                background-color: #75bfff;
+                border-radius: 0.5rem;
+            }
+        }
+    }
+
+}
+
 @keyframes collapse-class {
     from {
         left: 0;

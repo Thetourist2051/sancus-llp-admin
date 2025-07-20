@@ -257,6 +257,7 @@ const BlogPage: React.FC = () => {
       ),
     },
     { field: "categoryName", header: "Category" },
+    { field: "tags", header: "Blog Tags" },
     {
       field: "description",
       header: "Description",

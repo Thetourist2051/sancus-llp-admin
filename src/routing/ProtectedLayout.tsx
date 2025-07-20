@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router";
 import style from "./index.module.scss";
 import type { RouteInterface } from ".";
@@ -6,6 +6,8 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { tokenService } from "../services/token-service/token-service";
 import { RouteConstant } from "../constant/route-constant";
 import { showToast } from "../services/toaster-service";
+import { OverlayPanel } from "primereact/overlaypanel";
+import ResetPasswordDialog from "../pages/reset-password-dialog";
 
 interface ProtectedLayoutProps {
   ProtectedRoutes: RouteInterface[];
@@ -16,12 +18,11 @@ const ProtectedLayout = React.memo(
     const [currentRoute, setCurrentRoute] = useState<RouteInterface>(
       ProtectedRoutes[0]
     );
-    console.log("in Protected Route");
     const navigate = useNavigate();
     const userInfo = tokenService.retrieveUserInfo();
-    console.log("userInfo", userInfo);
-
+    const overlayPanelRef = useRef<OverlayPanel>(null);
     const [sidenavCollapsed, setSidenavCollapsed] = useState<boolean>(false);
+    const [displayDialog, setDisplayDialog] = useState<boolean>(false);
 
     const onLogout = () => {
       tokenService.clearAllToken();
@@ -34,8 +35,64 @@ const ProtectedLayout = React.memo(
       navigate(RouteConstant.Auth.Login);
     };
 
+    const onOverlayPanelToggle = (e: any) => {
+      if (overlayPanelRef && overlayPanelRef.current) {
+        overlayPanelRef.current.toggle(e);
+      }
+    };
+
+    const onResetPassword = () => {
+      setDisplayDialog(true);
+    };
+
     return (
       <>
+        <OverlayPanel ref={overlayPanelRef} closeOnEscape dismissable={true}>
+          <div className={style["overlay-panel-body"]}>
+            <ul className="m-0 p-0 list-unstyled">
+              <li>
+                <div
+                  className={
+                    style["panel_item"] +
+                    " " +
+                    "d-flex gap-2 align-items-center p-2 mb-2"
+                  }
+                  onClick={onResetPassword}
+                >
+                  <Icon
+                    icon={"hugeicons:reset-password"}
+                    height={24}
+                    width={24}
+                  ></Icon>
+                  <h6 className="m-0">Reset Password</h6>
+                </div>
+              </li>
+              <li>
+                <div
+                  className={
+                    style["panel_item"] +
+                    " " +
+                    "d-flex gap-2 align-items-center p-2"
+                  }
+                  onClick={onLogout}
+                >
+                  <Icon
+                    icon={"solar:logout-line-duotone"}
+                    height={24}
+                    width={24}
+                  ></Icon>
+                  <h6 className="m-0">Logout</h6>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </OverlayPanel>
+        {
+          <ResetPasswordDialog
+            visible={displayDialog}
+            onHide={() => setDisplayDialog(!displayDialog)}
+          />
+        }
         <div className={style["render-layout"]}>
           <div
             className={`${style["sidenav-section"]} ${
@@ -114,7 +171,10 @@ const ProtectedLayout = React.memo(
                   {currentRoute?.modulename}
                 </h5>
               </div>
-              <div className={style["avatar-section"]}>
+              <div
+                className={style["avatar-section"]}
+                onClick={onOverlayPanelToggle}
+              >
                 <div
                   className={style["profile-avatar"]}
                   aria-controls="ProfileMenu"

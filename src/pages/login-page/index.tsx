@@ -197,10 +197,10 @@ const LoginPage: React.FC = () => {
               </div>
 
               <Button
-                label={isLoading ? "Signing In..." : "Log In"}
+                label={isLoading ? "Loging In..." : "Log In"}
                 loading={isLoading}
                 onClick={handleSubmit(onSubmit)}
-                className="login-button w-100"
+                className="login-button w-100 rounded-2 justify-content-center align-items-center"
                 rounded
                 disabled={isLoading}
               />
