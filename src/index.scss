@@ -1,0 +1,326 @@
+:root {
+    color-scheme: light dark;
+    --bs-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --theme-color: #c5a059;
+    --bg-dark: #131316;
+
+    --transition-fast: 0.3s ease-in-out;
+    --transition-slow: 0.5s ease;
+
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    font-family: var(--bs-font-family);
+
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    padding-left: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+body {
+    font-family: var(--bs-font-family) !important;
+}
+
+.p-inputtext,
+.p-password .p-inputtext {
+    width: 100%;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.p-inputtext:focus,
+.p-password .p-inputtext:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.p-password {
+    width: 100%;
+}
+
+.p-password .p-password-panel {
+    display: none;
+}
+
+.p-checkbox .p-checkbox-box {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+    background: #6366f1;
+    border-color: #6366f1;
+}
+
+.p-inputtext {
+    height: 3rem;
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
+}
+
+.p-icon-field {
+    width: 100%;
+
+    .p-input-icon {
+        top: 1.125rem;
+        right: 1rem;
+    }
+}
+
+.small {
+    font-size: 0.75rem !important;
+}
+
+.p-dropdown {
+    height: 3rem;
+
+    .p-dropdown-label {
+        height: calc(3rem - 2px);
+    }
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    font-size: 0.875rem;
+}
+
+
+.login-form-container {
+    .form-item {
+        height: 6.75rem;
+    }
+}
+
+.p-chips .p-inputtext {
+    min-height: 3rem;
+}
+
+
+
+
+// Overlay Panel
+
+.p-overlaypanel .p-overlaypanel-content {
+    padding: 0.65rem 0.75rem;
+}
+
+.overlay_panel_class ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.overlay_panel_class ul li {
+    display: block;
+}
+
+.overlay_panel_class ul li .overlayItem {
+    height: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    color: var(--sec-color);
+    padding: 0 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.overlay_panel_class ul li .overlayItem:hover {
+    background: var(--color-amber-100);
+    transition: background 0.5s ease-in-out;
+}
+
+.overlay_panel_class ul li .overlayItem .pi {
+    font-size: 1rem;
+}
+
+.overlay_panel_class ul li .overlayItem h6 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0 0 0 0.875rem;
+    margin: 0;
+    line-height: 1.25rem;
+}
+
+// table styles 
+.global-table-style {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    font-size: 16px;
+    border: 1px solid var(--primary-800);
+    font-family: var(--bs-font-family) !important;
+}
+
+.global-table-style .p-datatable-thead {
+    top: 0;
+}
+
+
+.p-datatable .p-column-header-content {
+    justify-content: space-between;
+}
+
+.global-table-style .p-datatable-thead>tr>th {
+    border-width: 1px 1px 1px 1px !important;
+    background-color: var(--primary-800);
+    border: 1px solid var(--primary-700) !important;
+    border-color: var(--primary-700) !important;
+    color: #ffffff;
+    padding: 0.875rem 0.875rem;
+    min-width: 150px;
+}
+
+.global-table-style .p-datatable-tbody>tr>td {
+    font-size: 0.8125rem;
+    line-height: 1.25;
+    padding: 0.75rem 0.75rem;
+    font-weight: 500;
+    color: var(--primary-900);
+    border-width: 1px 1px 1px 1px !important;
+    border-color: #ddd;
+}
+
+.global-table-style .p-datatable-tbody>tr:last-child>td {
+    border-color: #ddd;
+    border-width: 1px 1px 1px 1px !important;
+}
+
+.global-table-style .p-datatable-thead tr th .p-column-header-content .p-column-title {
+    font-size: 0.875em;
+    font-weight: 600;
+    color: #f6faff;
+    white-space: nowrap;
+    line-height: 1.25rem;
+}
+
+.p-datatable .p-sortable-column .p-sortable-column-icon {
+    font-size: 0.8125rem;
+    height: 0.875rem;
+    width: 0.875rem;
+    color: #f6faff;
+}
+
+.p-datatable.p-datatable-striped .p-datatable-tbody>tr.p-row-odd {
+    background: #eff6ff; // Blue-50
+}
+
+.custom_paginator_class .p-dropdown {
+    margin: 0 0.5rem;
+    padding: 0 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5rem;
+}
+
+.custom_paginator_class .p-dropdown .p-dropdown-label {
+    padding-right: 0.65rem;
+    padding: 0.5rem 0.65rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary-800);
+    height: auto;
+}
+
+.custom_paginator_class .p-dropdown .p-dropdown-trigger {
+    width: 2.5rem;
+    color: var(--primary-800); // Blue-600
+}
+
+.custom_paginator_class .p-paginator-first,
+.custom_paginator_class .p-paginator-prev,
+.custom_paginator_class .p-paginator-current,
+.custom_paginator_class .p-paginator-next,
+.p-paginator .p-paginator-last {
+    height: 2rem;
+    min-width: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--primary-600); // Blue-600
+}
+
+
+
+
+// table Button
+.smallRoundButton {
+    height: 2.25rem;
+    width: 2.25rem;
+    border-radius: 50%;
+}
+
+
+// 
+.p-confirm-dialog {
+    .p-dialog-footer {
+        .p-button {
+            border-radius: 0.5rem;
+            gap: 0.5rem;
+
+            .p-button-label {
+                font-weight: 500;
+                padding: 0 0.25rem;
+                font-size: 0.875rem;
+            }
+        }
+    }
+}
+
+
+.p-toast .p-toast-message .p-toast-message-content {
+    align-items: center;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-message-text {
+    margin: 0 0.5rem 0 0.75rem;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-summary {
+    font-weight: 500;
+}
+
+.p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
+    margin: 0.5rem 0 0 0;
+    line-height: 1.2;
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+.p-toast .p-toast-message .p-toast-icon-close {
+    border-radius: 50% !important;
+}
+
+
+
+.ellipsis-text-2-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.ellipsis-text-3-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.ellipsis-text-4-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}

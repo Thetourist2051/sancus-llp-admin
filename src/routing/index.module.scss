@@ -1,0 +1,246 @@
+:root {
+    --sidenav-bg: var(--indigo-50);
+    --sidenav-hover: var(--indigo-100);
+    --sidenav-border: var(--bluegray-100);
+    --nav-item-hover-bg: var(--indigo-100);
+    --nav-item-hover-color: var(--indigo-800);
+    --nav-item-active-bg: var(--primary-500);
+    --nav-item-active-color: #fff;
+    --logo-bg: var(--blue-100);
+    --logo-hover-bg: var(--blue-200);
+    --logo-color: var(--blue-900);
+    --logout-bg: var(--blue-100);
+    --logout-hover-bg: var(--blue-200);
+    --scroll-bg: var(--bluegray-50);
+    --header-bg: var(--primary-500);
+    --avatar-bg: var(--primary-500);
+}
+
+.render-layout {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    box-sizing: border-box;
+    overflow: hidden;
+    --header-height: 4rem;
+}
+
+.sidenav-section {
+    width: 230px;
+    height: 100vh;
+    background-color: var(--sidenav-bg);
+    border-right: 1px solid var(--sidenav-border);
+}
+
+.logo-section {
+    height: 4rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--logo-bg);
+    color: var(--logo-color);
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: var(--logo-hover-bg);
+    }
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.collapse-icon {
+    cursor: pointer;
+}
+
+.nav-scroll-section {
+    height: calc(100vh - 8rem);
+    overflow-y: auto;
+    padding: 0.5rem;
+    background-color: var(--scroll-bg);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    color: var(--nav-item-hover-color);
+
+    .nav-text {
+        flex: 1;
+    }
+
+    &:hover {
+        background-color: var(--nav-item-hover-bg);
+        color: var(--nav-item-hover-color);
+    }
+}
+
+.nav-item-active {
+    @extend .nav-item;
+    background-color: var(--nav-item-active-bg);
+    color: var(--nav-item-active-color);
+
+    &:hover {
+        background-color: var(--primary-600);
+    }
+}
+
+.active_arrow {
+    transition: transform 0.5s;
+    transform: translateX(0);
+}
+
+.hide_arrow {
+    transform: translateX(-220px);
+}
+
+.logout-section {
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--logout-bg);
+    border-top: 1px solid var(--sidenav-border);
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: var(--logout-hover-bg);
+    }
+}
+
+.logout-text {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.outlet-section {
+    width: calc(100vw - 230px);
+    height: 100vh;
+}
+
+.outlet-header {
+    height: var(--header-height);
+    padding: 1rem;
+    background-color: var(--header-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    line-height: 1;
+}
+
+.expand-icon {
+    font-size: 1.25rem;
+    color: white;
+    margin-right: 0.75rem;
+    cursor: pointer;
+}
+
+.avatar-section {
+    position: relative;
+}
+
+.profile-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    background-color: var(--avatar-bg);
+    border: 2px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+        background-color: var(--primary-600);
+    }
+}
+
+.avatar-text {
+    font-size: 1.125rem;
+    text-transform: capitalize;
+}
+
+.scrollable-section {
+    height: calc(100vh - var(--header-height));
+    width: 100%;
+    background-color: var(--scroll-bg);
+    overflow: hidden;
+}
+
+.collapse-class {
+    animation: collapse-class 0.5s forwards;
+}
+
+@keyframes collapse-class {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: -230px;
+    }
+}
+
+.open-class {
+    animation: open-class 0.5s forwards;
+}
+
+@keyframes open-class {
+    from {
+        left: -230px;
+    }
+
+    to {
+        left: 0;
+    }
+}
+
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sidenav-section {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+
+    .outlet-section {
+        width: 100%;
+    }
+
+    .mobile-only {
+        display: inline-block;
+    }
+}

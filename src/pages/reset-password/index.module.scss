@@ -1,0 +1,260 @@
+// Reset Password Page styles - extends the login page styles
+.login-container {
+    background: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    height: 90vh;
+    max-width: 1200px;
+    margin: 5vh auto;
+    font-family: var(--bs-font-family);
+}
+
+.form-section {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); // Red gradient for reset password
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-button {
+    width: 100%;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); // Red gradient for reset button
+    border: none;
+    border-radius: 8px;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+}
+
+.login-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); // Red shadow
+}
+
+.login-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.register-section {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.register-link {
+    color: #ef4444; // Red color for links
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.register-link:hover {
+    color: #dc2626;
+}
+
+.illustration-section {
+    background: linear-gradient(135deg, #f87171 0%, #dc2626 100%); // Red gradient background
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-illustration {
+    width: 80%;
+    height: 80%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    backdrop-filter: blur(1px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.geometric-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(239, 68, 68, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(220, 38, 38, 0.2) 0%, transparent 50%);
+}
+
+.geometric-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.shape {
+    position: absolute;
+    opacity: 0.3;
+}
+
+.shape-1 {
+    top: 10%;
+    left: 10%;
+    width: 80px;
+    height: 80px;
+    background: #fbbf24;
+    border-radius: 50%;
+    animation: float 3s ease-in-out infinite;
+}
+
+.shape-2 {
+    top: 20%;
+    right: 20%;
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 70px solid #34d399;
+    animation: float 4s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+    bottom: 30%;
+    left: 15%;
+    width: 60px;
+    height: 60px;
+    background: #f472b6;
+    border-radius: 12px;
+    animation: float 2.5s ease-in-out infinite;
+}
+
+.shape-4 {
+    bottom: 15%;
+    right: 25%;
+    width: 100px;
+    height: 20px;
+    background: #06b6d4;
+    border-radius: 10px;
+    animation: float 3.5s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.admin-icon {
+    font-size: 4rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.admin-text {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.admin-subtext {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    text-align: center;
+}
+
+.p-message {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.p-message .p-message-wrapper {
+    padding: 0.75rem 1rem;
+}
+
+// Password strength indicator styling
+:global(.p-password-strength) {
+    height: 4px;
+    margin-top: 0.5rem;
+}
+
+:global(.p-password-strength .p-password-strength-bar) {
+    background: #e5e7eb;
+    border-radius: 2px;
+}
+
+:global(.p-password-strength .p-password-strength-bar.p-password-strength-weak) {
+    background: #ef4444;
+}
+
+:global(.p-password-strength .p-password-strength-bar.p-password-strength-medium) {
+    background: #f59e0b;
+}
+
+:global(.p-password-strength .p-password-strength-bar.p-password-strength-strong) {
+    background: #10b981;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        height: 100vh;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .illustration-section {
+        display: none;
+    }
+
+    .form-section {
+        padding: 2rem 1.5rem;
+    }
+}
