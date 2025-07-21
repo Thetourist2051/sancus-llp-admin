@@ -280,7 +280,7 @@ const BlogPage: React.FC = () => {
     },
     {
       field: "isActive",
-      header: "Is Deleted ?",
+      header: "Is Active ?",
       body: (row: any) => (row.isActive ? "No" : "Yes"),
     },
     { field: "createdBy", header: "Created By" },

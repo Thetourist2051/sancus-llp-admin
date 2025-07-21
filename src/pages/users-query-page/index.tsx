@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomTable from "../../components/custom-table/CustomTable";
+import { HTTPService } from "../../services/http-service/http-service";
+import OverlayLoader from "../../components/overlay-loader";
+import { formatDate } from "../../services/utils-service/date-utils";
 
 type Props = {};
 
 const UserQueryPage: React.FC<Props> = ({}: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [queryData, setQueryData] = useState<any[]>([]);
+
   const queryColumns = [
     {
-      field: "name",
-      header: "Name",
+      field: "fullName",
+      header: "Full Name",
       body: (rowData: any) => (
-        <div className="ellipsis-text">{rowData.name}</div>
+        <div className="ellipsis-text">{rowData.fullName}</div>
       ),
     },
     {
@@ -22,41 +26,71 @@ const UserQueryPage: React.FC<Props> = ({}: Props) => {
       ),
     },
     {
-      field: "phone",
-      header: "Phone",
+      field: "phoneNumber",
+      header: "Phone Number",
       body: (rowData: any) => (
-        <div className="ellipsis-text">{rowData.phone}</div>
+        <div className="ellipsis-text">{rowData.phoneNumber}</div>
       ),
     },
     {
-      field: "service",
-      header: "Service",
+      field: "serviceType",
+      header: "Service Type",
       body: (rowData: any) => (
-        <div className="ellipsis-text">{rowData.service}</div>
+        <div className="ellipsis-text">{rowData.serviceType}</div>
       ),
     },
     {
-      field: "message",
-      header: "Message",
+      field: "query",
+      header: "Query",
       body: (rowData: any) => (
-        <div className="ellipsis-text-2-line">{rowData.message}</div>
+        <div className="ellipsis-text-2-line">{rowData.query}</div>
       ),
     },
     {
       field: "createdAt",
-      header: "Query Date",
+      header: "Created At",
+    },
+    {
+      field: "updatedAt",
+      header: "Updated At",
     },
   ];
+
+  const fetchQueriesList = async () => {
+    setLoading(true);
+    try {
+      const res = await HTTPService.getRequest("/admin/queries");
+      if (res?.success) {
+        const queryData = res.data.map((blog: any) => ({
+          ...blog,
+          createdAt: formatDate(blog.createdAt),
+          updatedAt: formatDate(blog.updatedAt),
+        }));
+        setQueryData(queryData || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch queries:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchQueriesList();
+  }, []);
+
+  if (loading) {
+    return <OverlayLoader />;
+  }
+
   return (
-    <>
-      <div className="p-3">
-        <CustomTable
-          loading={loading}
-          tablecolumns={queryColumns}
-          tabledata={queryData}
-        />
-      </div>
-    </>
+    <div className="p-3">
+      <CustomTable
+        loading={loading}
+        tablecolumns={queryColumns}
+        tabledata={queryData}
+      />
+    </div>
   );
 };
 

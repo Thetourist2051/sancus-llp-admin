@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router";
 import style from "./index.module.scss";
 import type { RouteInterface } from ".";
@@ -7,7 +7,7 @@ import { tokenService } from "../services/token-service/token-service";
 import { RouteConstant } from "../constant/route-constant";
 import { showToast } from "../services/toaster-service";
 import { OverlayPanel } from "primereact/overlaypanel";
-import ResetPasswordDialog from "../pages/reset-password-dialog";
+import ChangePasswordDialog from "../pages/change-password-dialog";
 
 interface ProtectedLayoutProps {
   ProtectedRoutes: RouteInterface[];
@@ -18,6 +18,7 @@ const ProtectedLayout = React.memo(
     const [currentRoute, setCurrentRoute] = useState<RouteInterface>(
       ProtectedRoutes[0]
     );
+    console.log("In Protected Layout")
     const navigate = useNavigate();
     const userInfo = tokenService.retrieveUserInfo();
     const overlayPanelRef = useRef<OverlayPanel>(null);
@@ -30,7 +31,7 @@ const ProtectedLayout = React.memo(
         "success",
         "Logout",
         "You have successfully logged-out !",
-        300000
+        3000
       );
       navigate(RouteConstant.Auth.Login);
     };
@@ -44,6 +45,15 @@ const ProtectedLayout = React.memo(
     const onResetPassword = () => {
       setDisplayDialog(true);
     };
+
+    // useEffect(() => {
+    //   const token = tokenService.getAccessToken();
+    //   if (!token) {
+    //     showToast("warn", "Session Expired", "Please login again.", 3000);
+    //     navigate(RouteConstant.Auth.Login);
+    //   }
+    // }, [navigate]);
+    
 
     return (
       <>
@@ -88,7 +98,7 @@ const ProtectedLayout = React.memo(
           </div>
         </OverlayPanel>
         {
-          <ResetPasswordDialog
+          <ChangePasswordDialog
             visible={displayDialog}
             onHide={() => setDisplayDialog(!displayDialog)}
           />

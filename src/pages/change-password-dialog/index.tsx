@@ -12,43 +12,46 @@ import { RouteConstant } from "../../constant/route-constant";
 import styles from "./index.module.scss";
 import { tokenService } from "../../services/token-service/token-service";
 
-interface ResetPasswordDialogProps {
+interface ChangePasswordDialogProps {
   visible: boolean;
   onHide: () => void;
 }
 
-interface ResetPasswordFormData {
+interface ChangePasswordFormData {
+  currentPassword: string;
   password: string;
   confirmPassword: string;
 }
 
-const ResetPasswordDialog: React.FC<ResetPasswordDialogProps> = ({
+const ChangePasswordDialog: React.FC<ChangePasswordDialogProps> = ({
   visible,
   onHide,
 }) => {
   const [loading, setLoading] = useState(false);
-  const token = tokenService.getAccessToken();
+
   const navigate = useNavigate();
 
-  const { control, watch, handleSubmit } = useForm<ResetPasswordFormData>({
+  const { control, watch, handleSubmit } = useForm<ChangePasswordFormData>({
     defaultValues: {
+      currentPassword: "",
       password: "",
       confirmPassword: "",
     },
   });
 
   const password = watch("password");
+  const currentPassword = watch("currentPassword");
 
-  const handleFormSubmit = async (data: ResetPasswordFormData) => {
+  const handleFormSubmit = async (data: ChangePasswordFormData) => {
     setLoading(true);
     try {
-      const response = await HTTPService.postRequest("/admin/reset-password", {
-        token,
+      const response = await HTTPService.putRequest("/admin/change-password", {
+        currentPassword: data.currentPassword,
         newPassword: data.password,
       });
 
       if (response?.success) {
-        showToast("success", "Success", "Password reset successfully.");
+        showToast("success", "Success", "Password changed successfully.");
         navigate(RouteConstant.Auth.Login);
         tokenService.clearAllToken();
         onHide();
@@ -63,7 +66,7 @@ const ResetPasswordDialog: React.FC<ResetPasswordDialogProps> = ({
       showToast(
         "error",
         "Reset Failed",
-        "Failed to reset password. Please check your token and try again."
+        "Failed to reset password. Please check your current password and try again."
       );
     } finally {
       setLoading(false);
@@ -151,7 +154,9 @@ const ResetPasswordDialog: React.FC<ResetPasswordDialogProps> = ({
 
   const buttonPassthrough = {
     root: {
-      className: classNames(styles.submitButton, { [styles.loading]: loading }),
+      className: classNames(styles.submitButton, { 
+        [styles.loading]: loading
+      }),
     },
     label: { className: styles.buttonLabel },
   };
@@ -168,6 +173,52 @@ const ResetPasswordDialog: React.FC<ResetPasswordDialogProps> = ({
     >
       <div className={styles.formContainer}>
         <div className={styles.formWrapper}>
+          {/* Current Password Field */}
+          <div className={styles.fieldGroup}>
+            <Controller
+              name="currentPassword"
+              control={control}
+              rules={{
+                required: "Current password is required",
+              }}
+              render={({ field, fieldState }) => (
+                <div className={styles.fieldWrapper}>
+                  <label className={styles.fieldLabel}>Current Password</label>
+                  <div className={styles.inputGroup}>
+                    <div
+                      className={classNames(styles.inputGlow, {
+                        [styles.active]: field.value,
+                      })}
+                    />
+                    <div
+                      className={classNames(styles.inputContainer, {
+                        [styles.invalid]: fieldState.invalid,
+                      })}
+                    >
+                      <Password
+                        {...field}
+                        placeholder="Enter your current password"
+                        toggleMask
+                        feedback={false}
+                        pt={passwordPassthrough}
+                      />
+                    </div>
+                  </div>
+
+                  {fieldState.error && (
+                    <div className={styles.errorMessage}>
+                      <Icon
+                        icon="heroicons:exclamation-circle-20-solid"
+                        className={styles.errorIcon}
+                      />
+                      <span>{fieldState.error.message}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+            />
+          </div>
+
           {/* Password Field */}
           <div className={styles.fieldGroup}>
             <Controller
@@ -184,6 +235,8 @@ const ResetPasswordDialog: React.FC<ResetPasswordDialogProps> = ({
                   message:
                     "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
                 },
+                validate: (value) => 
+                  value !== currentPassword || "New password must be different from current password",
               }}
               render={({ field, fieldState }) => (
                 <div className={styles.fieldWrapper}>
@@ -346,4 +399,4 @@ const ResetPasswordDialog: React.FC<ResetPasswordDialogProps> = ({
   );
 };
 
-export default ResetPasswordDialog;
+export default ChangePasswordDialog;
